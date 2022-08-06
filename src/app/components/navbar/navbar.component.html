@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+  <div class="container px-5">
+    <a *ngIf="isLogin"  class="navbar-brand ps-5" routerLink="/profile"><i class="fa-solid fa-note-sticky"></i> Notes</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav ms-auto pe-5">
+      <li *ngIf="!isLogin" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Login
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/signup">Sign Up</a></li>
+          <li><a class="dropdown-item" routerLink="/signin">Sign In</a></li>
+        </ul>
+      </li>
+      <li *ngIf="isLogin" class="nav-item">
+        <span (click)="logOut()" class="nav-link pointer">logOut</span>
+      </li>
+    </ul>
+  </div>
+</nav>

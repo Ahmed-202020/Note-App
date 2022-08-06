@@ -1,0 +1,30 @@
+<section id="signin">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="form w-50">
+    <div *ngIf="loginData" class="alert alert-danger py-1">{{loginData}}</div>
+    <input [ngClass]="{'is-valid': !loginForm.get('email')?.errors}" type="email" formControlName="email" name="email"
+      class="form-control mb-3" placeholder="Enter Your Email" />
+    <div *ngIf="loginForm.get('email')?.errors&&loginForm.get('email')?.touched" class="mt-2">
+      <p *ngIf="loginForm.get('email')?.getError('email')" class="alert alert-danger mb-2 py-1">
+        Email-Format is invalid
+      </p>
+      <p *ngIf="loginForm.get('email')?.getError('required')" class="alert alert-danger py-1">
+        email is required
+      </p>
+    </div>
+    <input [ngClass]="{'is-valid' : !loginForm.get('password')?.errors}" type="password" formControlName="password"
+      name="password" class="form-control mb-3" placeholder="Enter Password" />
+    <div *ngIf="loginForm.get('password')?.errors&&loginForm.get('password')?.touched" class="mt-2">
+      <p *ngIf="loginForm.get('password')?.getError('pattern')" class="alert alert-danger mb-2 py-1">
+        password should start with uppercase
+      </p>
+      <p *ngIf="loginForm.get('password')?.getError('required')" class="alert alert-danger py-1">
+        password is required
+      </p>
+    </div>
+    <button [ngClass]="loginForm.invalid ? 'btn-secondary' : 'btn-info'" [disabled]="loginForm.invalid" type="submit" class=" w-100  btn">
+      <span *ngIf="!isLoading">Sign In</span>
+      <span *ngIf="isLoading">Waiting...</span>
+    </button>
+  </form>
+</section>
+

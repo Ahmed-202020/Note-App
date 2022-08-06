@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AEHA,OFGO,CEHF;EACH,QAAQ,EAAE,QAAQ;EAClB,UAAU,EAAE,KAAK;EACjB,gBAAgB,EDHZ,OAAO;CCmBZ;;AFhBD,AEEE,OFFK,CEEL,KAAK,CAAC;EACJ,QAAQ,EAAE,QAAQ;EAClB,IAAI,EAAE,GAAG;EACT,GAAG,EAAE,GAAG;EACR,SAAS,EAAE,qBAAqB;EAChC,iBAAiB,EAAE,qBAAqB;EACxC,cAAc,EAAE,qBAAqB;EACrC,aAAa,EAAE,qBAAqB;EACpC,YAAY,EAAE,qBAAqB;CAKpC",
+    "sources": [
+        "signin.component.scss",
+        "../../_vars.scss",
+        "../../_form.scss"
+    ],
+    "names": [],
+    "file": "signin.component.css"
+}

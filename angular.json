@@ -28,9 +28,15 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js" ,
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ,
+              "./node_modules/assets/jquery.particleground.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -96,6 +102,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -103,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "92afe963-bcfe-4c4d-a051-0a3fd6e33546"
   }
 }

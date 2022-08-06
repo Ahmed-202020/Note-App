@@ -1,0 +1,41 @@
+@import "../../vars";
+#profile{
+  background-color: $gray;
+  min-height: 100vh;
+  position: relative;
+  .load{
+    top: 15% ;
+    left: 0;
+    position: absolute ;
+  }
+  .note{
+    min-height: 200px ;
+    max-height: 200px ;
+    background-color: $note;
+    overflow-y: auto;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    .icon{
+      cursor: pointer ;
+    }
+    h4 , p{
+      overflow-x: auto ;
+    }
+  }
+}
+@media(max-width:1024px) {
+  #profile{
+    .row{
+      padding-inline: 0 !important;
+    }
+  }
+}
+
+@media(max-width:280px) {
+  #profile{
+    padding-inline: 0 !important;
+  }
+}

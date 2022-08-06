@@ -1,0 +1,6 @@
+@import "../../vars" ;
+@import "../../form" ;
+
+#signup{
+  @extend %form ; 
+}
