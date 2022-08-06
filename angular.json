@@ -35,7 +35,7 @@
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js" ,
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ,
-              "./node_modules/assets/jquery.particleground.min.js"
+              "./node_modules/jquery/jquery.particleground.min.js"
             ]
           },
           "configurations": {
