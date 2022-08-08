@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PluginService } from '../../services/plugin.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -11,9 +10,8 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
   loginData: string = "";
   isLoading: boolean = false;
-  constructor(private _PluginService: PluginService , private _AuthService:AuthService , private _Router:Router) { }
+  constructor(private _AuthService:AuthService , private _Router:Router) { }
   ngOnInit(): void {
-    this._PluginService.getPlugin("#signin") ;
   }
   loginForm: FormGroup = new FormGroup({
     email : new FormControl(null , [Validators.email , Validators.required]) ,

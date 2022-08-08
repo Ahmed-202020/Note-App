@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import  jwtDecode  from 'jwt-decode';
+import { AddNote, DeleteNote, UpdateNote } from './../interfaces/notes';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class NotesService {
   userID = this.decoded._id;
   constructor(private _HttpClient: HttpClient) { }
 
-  addNote(data:any):Observable<any> {
+  addNote(data:AddNote):Observable<any> {
     return this._HttpClient.post(this.baseURL+"addNote" , data)
   }
   getAllNotes(): Observable<any> {
@@ -30,7 +31,7 @@ export class NotesService {
     return this._HttpClient.get(this.baseURL+"getUserNotes" , options)
   }
 
-  deleteNote(data: any): Observable<any> {
+  deleteNote(data: DeleteNote): Observable<any> {
     let options = {
       headers: new HttpHeaders({
       }),
@@ -41,7 +42,7 @@ export class NotesService {
     }
     return this._HttpClient.delete(this.baseURL+"deleteNote" , options)
   }
-  updateNote(data:any):Observable<any> {
+  updateNote(data:UpdateNote):Observable<any> {
     return this._HttpClient.put(this.baseURL+"updateNote" , data)
   }
 }

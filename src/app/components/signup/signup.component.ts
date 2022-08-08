@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PluginService } from '../../services/plugin.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -13,9 +12,8 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   registerData: string = "";
   isLoading: boolean = false;
-  constructor(private _PluginService: PluginService , private _AuthService:AuthService , private _Router:Router) { }
+  constructor(private _AuthService:AuthService , private _Router:Router) { }
   ngOnInit(): void {
-    this._PluginService.getPlugin("#signup");
   }
   registerForm: FormGroup = new FormGroup({
     first_name : new FormControl(null , [Validators.minLength(3) , Validators.maxLength(16) , Validators.required]) ,
