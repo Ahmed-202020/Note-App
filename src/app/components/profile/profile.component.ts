@@ -17,12 +17,16 @@ export class ProfileComponent implements OnInit {
     this.getAllNotes()
   }
   getAllNotes() {
-    this.isLoading = true ;
+    if(this.allNotes === null){
+      this.isLoading = false ;
+    }else{
+      this.isLoading = true;
+    }
     this._NotesService.getAllNotes().subscribe({
       next: res => {
         this.isLoading = false;
         this.allNotes = res.Notes;
-      },
+      }
     })
   }
   addNoteForm: FormGroup = new FormGroup({
