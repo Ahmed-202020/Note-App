@@ -1,6 +1,5 @@
 <section id="signup">
   <form [formGroup]="registerForm" (ngSubmit)="register()" class="form w-50">
-    <div *ngIf="registerData" class="alert alert-danger py-1">{{registerData}}</div>
     <div class="row mb-3">
       <div class="col-md-6">
         <input [ngClass]=" {'is-valid' : !registerForm.get('first_name')?.errors}" type="text" formControlName="first_name" name="first_name" class="form-control" placeholder="Enter First Name" />
@@ -50,8 +49,7 @@
       </p>
     </div>
     <button [ngClass]="registerForm.invalid ? 'btn-secondary' : 'btn-info' " [disabled]="registerForm.invalid" type="submit" class=" w-100  btn">
-      <span *ngIf="!isLoading">Sign Up</span>
-      <span *ngIf="isLoading">Waiting...</span>
+      Sign Up
     </button>
   </form>
 </section>

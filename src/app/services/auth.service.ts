@@ -1,32 +1,25 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import jwtDecode from 'jwt-decode';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Login, Register } from '../interfaces/auth';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData:any = new BehaviorSubject(null);
-  baseURL: string = "https://route-egypt-api.herokuapp.com/";
-  constructor(private _HttpClient: HttpClient , private _Router:Router) { }
+  ls:any = localStorage.getItem("login");
+  login: boolean = JSON.parse(this.ls) || false;
+  isLogin: any = new BehaviorSubject(this.login);
+  constructor(private _Router:Router) { }
 
-  saveUserData() {
-    let encodedToken = JSON.stringify(localStorage.getItem("userToken"));
-    let decodedToken = jwtDecode(encodedToken);
-    this.userData.next(decodedToken);
-  }
-  signUP(registerForm:Register):Observable<any>{
-    return this._HttpClient.post(this.baseURL + "signup" , registerForm)
-  }
-  signIn(loginForm:Login):Observable<any>{
-    return this._HttpClient.post(this.baseURL + "signin" , loginForm)
+  signIn(){
+    this.login = true;
+    this.isLogin.next(this.login);
+    localStorage.setItem("login", this.isLogin.getValue());
   }
   signOut(){
-    localStorage.removeItem("userToken");
-    this.userData.next(null);
+    this.login = false;
+    this.isLogin.next(this.login);
+    localStorage.setItem("login", this.isLogin.getValue());
     this._Router.navigate(["/signin"]);
   }
 }

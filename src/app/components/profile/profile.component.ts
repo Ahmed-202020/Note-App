@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NotesService } from './../../services/notes.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 declare var $: any;
 @Component({
@@ -8,101 +7,67 @@ declare var $: any;
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  allNotes: any = null;
-  isLoading: boolean = false;
-  NoteId: any;
-  constructor(private _NotesService: NotesService) {
+  id: any;
+  ls:any = localStorage.getItem("notes");
+  allNotes:any[] = JSON.parse(this.ls) || [];
+
+  constructor() {
   }
   ngOnInit(): void {
     this.getAllNotes()
   }
   getAllNotes() {
-    if(this.allNotes === null){
-      this.isLoading = false ;
-    }else{
-      this.isLoading = true;
-    }
-    this._NotesService.getAllNotes().subscribe({
-      next: res => {
-        this.isLoading = false;
-        this.allNotes = res.Notes;
-      }
-    })
+    return this.allNotes;
   }
   addNoteForm: FormGroup = new FormGroup({
     title : new FormControl(null , [Validators.required]) ,
     desc : new FormControl(null , [Validators.required])
   })
+
   addNote() {
-    let data = {
+    let note = {
       title: this.addNoteForm.value.title,
-      desc: this.addNoteForm.value.desc,
-      userID: this._NotesService.userID ,
-      token: this._NotesService.token
+      desc: this.addNoteForm.value.desc
     }
     if (this.addNoteForm.valid) {
-      this.isLoading = true ;
-      this._NotesService.addNote(data).subscribe(res => {
-        if (res.message === "success") {
-          this.isLoading = false;
-          $("#addNote").modal("hide");
-          this.getAllNotes();
-          this.addNoteForm.reset();
-        } else {
-          this.isLoading = false;
-        }
-      });
+      this.allNotes.push(note);
+      this.getAllNotes();
+      $("#addNote").modal("hide");
+      this.addNoteForm.reset();
     }
+    localStorage.setItem("notes", JSON.stringify(this.allNotes));
   }
-  getId(id: string) {
-    this.NoteId = id ;
+  getNote(note:any) {
+    let index = this.allNotes.indexOf(note);
+    this.id = index;
   }
   deleteNote() {
-    let data = {
-      NoteID:this.NoteId ,
-      token:this._NotesService.token
-    }
-    this.isLoading = true
-    this._NotesService.deleteNote(data).subscribe({
-      next: res => {
-        if (res.message === "deleted") {
-          this.isLoading = false;
-          $("#deleteNote").modal("hide");
-          this.getAllNotes();
-        }
-      }
-    })
+    console.log(this.id);
+    this.allNotes.splice(this.id , 1);
+    $("#deleteNote").modal("hide");
+    localStorage.setItem("notes", JSON.stringify(this.allNotes));
   }
   updateNoteForm: FormGroup = new FormGroup({
     title : new FormControl(null , [Validators.required]) ,
     desc : new FormControl(null , [Validators.required])
   })
-  setNoteDetails() {
-    for (let note of this.allNotes) {
-      if (note._id === this.NoteId) {
-        this.updateNoteForm.controls['title'].setValue(note.title);
-        this.updateNoteForm.controls['desc'].setValue(note.desc);
-      }
+  setNoteDetails(note:any) {
+    let index = this.allNotes.indexOf(note);
+    if (this.id == index) {
+      this.updateNoteForm.controls['title'].setValue(note.title);
+      this.updateNoteForm.controls['desc'].setValue(note.desc);
     }
   }
 
   updateNote() {
-    let data = {
+    let newNote = {
       title: this.updateNoteForm.value.title,
       desc: this.updateNoteForm.value.desc,
-      NoteID: this.NoteId ,
-      token: this._NotesService.token
     }
-    if (this.updateNoteForm.valid) {
-      this.isLoading = true;
-      this._NotesService.updateNote(data).subscribe({
-        next: res => {
-          if(res.message === "updated")
-          this.isLoading = false;
-          $("#editNote").modal("hide");
-          this.getAllNotes();
-        }
-      })
-    }
+    this.allNotes[this.id].title = newNote.title;
+    this.allNotes[this.id].desc = newNote.desc;
+    $("#editNote").modal("hide");
+    this.getAllNotes();
+    localStorage.setItem("notes", JSON.stringify(this.allNotes));
   }
 }

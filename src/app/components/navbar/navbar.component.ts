@@ -11,17 +11,12 @@ export class NavbarComponent implements OnInit {
   constructor(private _AuthService:AuthService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem("userToken")) {
-      this._AuthService.saveUserData(); 
+    const ls = localStorage.getItem("login");
+    if (ls) {
+      this.isLogin = JSON.parse(ls);
     }
-    this._AuthService.userData.subscribe({
-      next: () => {
-        if (this._AuthService.userData.getValue()!=null) {
-          this.isLogin = true;
-        } else {
-          this.isLogin = false;
-        }
-      }
+    this._AuthService.isLogin.subscribe(() => {
+      this.isLogin = this._AuthService.isLogin.getValue();
     })
   }
   logOut() {

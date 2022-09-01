@@ -1,6 +1,5 @@
 <section id="signin">
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="form w-50">
-    <div *ngIf="loginData" class="alert alert-danger py-1">{{loginData}}</div>
     <input [ngClass]="{'is-valid': !loginForm.get('email')?.errors}" type="email" formControlName="email" name="email"
       class="form-control mb-3" placeholder="Enter Your Email" />
     <div *ngIf="loginForm.get('email')?.errors&&loginForm.get('email')?.touched" class="mt-2">
@@ -22,8 +21,7 @@
       </p>
     </div>
     <button [ngClass]="loginForm.invalid ? 'btn-secondary' : 'btn-info'" [disabled]="loginForm.invalid" type="submit" class=" w-100  btn">
-      <span *ngIf="!isLoading">Sign In</span>
-      <span *ngIf="isLoading">Waiting...</span>
+      Sign In
     </button>
   </form>
 </section>

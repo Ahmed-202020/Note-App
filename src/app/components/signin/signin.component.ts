@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-  loginData: string = "";
-  isLoading: boolean = false;
   constructor(private _AuthService:AuthService , private _Router:Router) { }
   ngOnInit(): void {
   }
@@ -19,21 +17,8 @@ export class SigninComponent implements OnInit {
   })
   login() {
     if (this.loginForm.valid) {
-      this.isLoading = true;
-      this._AuthService.signIn(this.loginForm.value).subscribe({
-        next: (res) => {
-          if (res.message === "success") {
-            this.isLoading = false;
-            localStorage.setItem("userToken", res.token);
-            this._AuthService.saveUserData();
-            this._Router.navigate(["/profile"]);
-          } else {
-            this.isLoading = false;
-            this.loginData = res.message;
-          }
-        }
-    })
+      this._AuthService.signIn();
+      this._Router.navigate(["/profile"]);
     }
   }
-
 }

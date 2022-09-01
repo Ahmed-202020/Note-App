@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  registerData: string = "";
-  isLoading: boolean = false;
   constructor(private _AuthService:AuthService , private _Router:Router) { }
   ngOnInit(): void {
   }
@@ -24,18 +22,7 @@ export class SignupComponent implements OnInit {
   })
   register() {
     if (this.registerForm.valid) {
-      this.isLoading = true;
-      this._AuthService.signUP(this.registerForm.value).subscribe({
-        next: (res) => {
-          if (res.message === "success") {
-            this.isLoading = false;
-            this._Router.navigate(["/signin"]);
-          } else {
-            this.isLoading = false;
-            this.registerData = res.message;
-          }
-        }
-    })
+        this._Router.navigate(["/signin"]);
     }
   }
 }
